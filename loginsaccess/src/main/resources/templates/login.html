@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymelear.org">
+
+<head>
+<meta charset="UTF-8">
+
+<title>Login画面</title>
+</head>
+
+<body>
+<h1>ユーザー登録</h1>
+	<form action="#" th:action="@{/login}" th:object="${user}" method="post">
+		<!-- ユーザーID -->
+	<label>ユーザーID:</label>
+		<!-- パスワード -->
+	<input type="text" class="form-control" th:field="*{name}" /><br>
+	<label>パスワード:</label>
+	<input type="password" class="form-control" th:field="*{password}" /><br>
+		<!-- ログインボタン -->
+	<button type="submit">ログイン</button>
+	</form>
+</body>
+
+</html>

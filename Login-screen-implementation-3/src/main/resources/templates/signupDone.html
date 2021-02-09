@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+
+<title>ユーザー新規登録完了画面</title>
+</head>
+
+<body>
+<form th:action="@{/signupDone}" method="post">
+	<!-- ユーザー新規登録完了ボタン -->
+    <a th:href="@{/loginSuccess}">完了</a>
+</form>
+</body>
+
+</html>

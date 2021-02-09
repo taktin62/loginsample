@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+
+<title>ユーザー詳細画面</title>
+</head>
+
+<body>
+<form th:action="@{/menuDetails}" method="post">
+	<!-- ユーザー編集画面ボタン -->
+    <a th:href="@{/menuEdit}">編集</a>
+    <!-- ユーザー退会画面ボタン -->
+    <a th:href="@{/menuConfirmation}">退会</a>
+</form>
+
+</body>
+
+</html>

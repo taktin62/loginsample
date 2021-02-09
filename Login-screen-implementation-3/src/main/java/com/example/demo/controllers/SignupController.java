@@ -11,15 +11,5 @@ public class SignupController {
         // signup.htmlに画面遷移
         return "signup";
     }
-	@GetMapping("/signupConfirmation")
-	public String getSignupSuccess(Model model) {
-        // signupConfirmation.htmlに画面遷移
-        return "signupConfirmation";
-    }
-	@GetMapping("/signupDone")
-	public String getSignupDone(Model model) {
-        // signupDone.htmlに画面遷移
-        return "signupDone";
-    }
 
 }

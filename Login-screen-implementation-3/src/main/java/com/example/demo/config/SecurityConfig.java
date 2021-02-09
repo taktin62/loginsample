@@ -27,7 +27,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()  //HttpSecurityから、アクセス範囲を決めるクラスを取得
                 // アクセス権限の設定
                 // アクセス制限の無いURL
-                .antMatchers("/", "/login", "/error").permitAll()  //ルート「/」は全ユーザーがアクセス可能
+                .antMatchers("/", "/login", "/error","/signup","/signupConfirmation","/signupDone","/loginSuccess","/menuDetails","/menuEdit","/menuConfigramation","/menuDone").permitAll()
+                //↑ルート「/」は全ユーザーがアクセス可能
                 // その他は認証済みであること
                 .anyRequest().authenticated()  //他のURLは認証が必要
                 .and()

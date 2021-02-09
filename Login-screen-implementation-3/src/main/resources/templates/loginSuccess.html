@@ -12,9 +12,10 @@
 
 <h1>ログイン成功</h1>
 
-ログインユーザー名：<span th:text="${username}"></span>
-
-  <a href="logout">ログアウト</a>
+	ログインユーザー名：<span th:text="${username}"></span>
+	<!-- ユーザー詳細画面ボタン -->
+    <a th:href="@{/menuDetails}">詳細</a>
+  	<a href="logout">ログアウト</a>
 </body>
 
 </html>

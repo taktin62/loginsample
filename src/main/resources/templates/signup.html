@@ -5,13 +5,13 @@
 <head>
 <meta charset="UTF-8">
 
-<title>ユーザー登録画面</title>
+<title>ユーザー新規登録画面</title>
 </head>
 
 <body>
 <form th:action="@{/signup}" method="post">
-	<!-- ユーザー登録ボタン -->
-    <button class="btn btn-primary" type="submit">ユーザー登録</button>
+	<!-- ユーザー新規登録ボタン -->
+    <a th:href="@{/signupConfirmation}">登録</a>
 </form>
 </body>
 

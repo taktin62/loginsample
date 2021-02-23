@@ -10,8 +10,23 @@
 
 <body>
 <form th:action="@{/signup}" method="post">
+	<table>
+	<tbody>
+		<tr>
+		<th>ユーザーID</th>
+		<td><input type="text" name="username" maxlength="128" size="32"></td>
+		</tr>
+
+		<tr>
+		<th>パスワード</th>
+		<td><input type="password" name="password" maxlength="128" size="32"></td>
+		</tr>
+
+		</tbody>
+	</table>
 	<!-- ユーザー新規登録ボタン -->
-    <a th:href="@{/signupConfirmation}">登録</a>
+    <a th:href="@{/signupConfirmation}">確認</a>
+    <a>戻る</a>
 </form>
 </body>
 

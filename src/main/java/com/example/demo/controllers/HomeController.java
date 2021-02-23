@@ -11,20 +11,28 @@ public class HomeController {
         // menuDetails.htmlに画面遷移
         return "menuDetails";
     }
+
+
 	@GetMapping("/menuEdit")
     public String getEdit(Model model) {
         // menuEdit.htmlに画面遷移
         return "menuEdit";
     }
+
+
 	@GetMapping("/menuConfirmation")
 	public String getConfiramtion(Model model) {
         // menuConfirmation.htmlに画面遷移
         return "menuConfirmation";
     }
+
+
 	@GetMapping("/menuDone")
 	public String getdone(Model model) {
         // menuDone.htmlに画面遷移
         return "menuDone";
     }
+
+
 
 }

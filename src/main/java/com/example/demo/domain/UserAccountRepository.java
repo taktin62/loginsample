@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 public interface UserAccountRepository {
-    public UserAccount getUserAccountByUserName(String username);
+    public UserDetails getUserAccountByUserName(String username);
 }

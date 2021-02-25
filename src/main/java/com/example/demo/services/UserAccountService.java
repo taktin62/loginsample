@@ -5,7 +5,9 @@ import com.example.demo.repositories.UserAccountRepositoryImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserAccountService implements UserDetailsService {
     UserAccountRepository userAccountRepository = new UserAccountRepositoryImpl();
 

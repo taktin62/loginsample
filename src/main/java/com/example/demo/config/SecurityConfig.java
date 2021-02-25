@@ -1,18 +1,47 @@
 package com.example.demo.config;
 
+import com.example.demo.services.UserAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private UserAccountService userAccountService;
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public void setUserAccountService(UserAccountService userAccountService) {
+        this.userAccountService = userAccountService;
+    }
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() throws Exception {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 
     @Override
     public void configure(WebSecurity web) throws Exception {
@@ -63,20 +92,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // セッションが無効な時の遷移先
                 .invalidSessionUrl("/invalidSession");
     }
-//
-//    @Autowired
-//    protected void config(AuthenticationManagerBuilder auth) throws Exception {
-//    	//HttpSecurityを引数に受けるconfigureメソッドの他にAuthenticationManagerBuilderを受け取るメソッドがあり、ユーザー認証処理はここに設定を記述する。
-//        auth
-//            .inMemoryAuthentication()  //インメモリ認証を行なう指定
-//                .withUser(
-//                        User.withDefaultPasswordEncoder()
-//                        .username("foo").password("foopass").roles("USER").build())
-//                        .and()
-//            .inMemoryAuthentication()
-//                .withUser(
-//                        User.withDefaultPasswordEncoder()
-//                        .username("bar").password("barpass").roles("ADMIN", "USER").build());
-//    }
 
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.eraseCredentials(true).userDetailsService(userAccountService).passwordEncoder(passwordEncoder);
+    }
 }

@@ -63,20 +63,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // セッションが無効な時の遷移先
                 .invalidSessionUrl("/invalidSession");
     }
-
-    @Autowired
-    protected void config(AuthenticationManagerBuilder auth) throws Exception {
-    	//HttpSecurityを引数に受けるconfigureメソッドの他にAuthenticationManagerBuilderを受け取るメソッドがあり、ユーザー認証処理はここに設定を記述する。
-        auth
-            .inMemoryAuthentication()  //インメモリ認証を行なう指定
-                .withUser(
-                        User.withDefaultPasswordEncoder()
-                        .username("foo").password("foopass").roles("USER").build())
-                        .and()
-            .inMemoryAuthentication()
-                .withUser(
-                        User.withDefaultPasswordEncoder()
-                        .username("bar").password("barpass").roles("ADMIN", "USER").build());
-    }
+//
+//    @Autowired
+//    protected void config(AuthenticationManagerBuilder auth) throws Exception {
+//    	//HttpSecurityを引数に受けるconfigureメソッドの他にAuthenticationManagerBuilderを受け取るメソッドがあり、ユーザー認証処理はここに設定を記述する。
+//        auth
+//            .inMemoryAuthentication()  //インメモリ認証を行なう指定
+//                .withUser(
+//                        User.withDefaultPasswordEncoder()
+//                        .username("foo").password("foopass").roles("USER").build())
+//                        .and()
+//            .inMemoryAuthentication()
+//                .withUser(
+//                        User.withDefaultPasswordEncoder()
+//                        .username("bar").password("barpass").roles("ADMIN", "USER").build());
+//    }
 
 }

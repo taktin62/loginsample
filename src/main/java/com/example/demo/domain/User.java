@@ -1,7 +1,5 @@
 package com.example.demo.domain;
 
-import org.springframework.data.annotation.Id;
-
 import java.util.Optional;
 
 public class User {
@@ -9,7 +7,6 @@ public class User {
     /**
      * UserId
      */
-    @Id
     private final UserId userId;
 
     /**
@@ -20,26 +17,26 @@ public class User {
     /**
      * パスワード
      */
-    private final Password Password;
+    private final String passwordHash;
 
     /**
      * コンストラクタ
      * @param userId UserId
      * @param userName ユーザネーム（システムログイン用）
-     * @param password パスワード
+     * @param passwordHash パスワード
      */
-    public User(UserId userId, String userName, com.example.demo.domain.Password password) {
+    public User(UserId userId, String userName, String passwordHash) {
         this.userId = userId;
         this.userName = userName;
-        Password = password;
+        this.passwordHash = passwordHash;
     }
 
     /**
      * UserId取得
      * @return UserId
      */
-    public Optional<UserId> getUserId() {
-        return Optional.ofNullable(userId);
+    public UserId getUserId() {
+        return userId;
     }
 
     /**
@@ -54,8 +51,8 @@ public class User {
      * パスワード取得
      * @return パスワード
      */
-    public Password getPassword() {
-        return Password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
     /**
@@ -65,6 +62,6 @@ public class User {
      * @return ユーザ
      */
     static User of(String userName, Password password) {
-        return new User(null, userName, password);
+        return new User(null, userName, password.getHash());
     }
 }

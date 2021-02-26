@@ -15,11 +15,6 @@ public class PasswordForSpringSecurity implements Password {
     }
 
     @Override
-    public Boolean compareRePassword(String rePasswordValue) {
-        return value.equals(rePasswordValue);
-    }
-
-    @Override
     public String getHash() {
         return passwordEncoder.encode(value);
     }

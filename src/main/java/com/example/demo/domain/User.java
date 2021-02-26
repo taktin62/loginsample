@@ -61,7 +61,7 @@ public class User {
      * @param password パスワード
      * @return ユーザ
      */
-    static User of(String userName, Password password) {
+    public static User of(String userName, Password password) {
         return new User(null, userName, password.getHash());
     }
 }

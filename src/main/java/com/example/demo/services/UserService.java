@@ -1,43 +1,63 @@
 package com.example.demo.services;
 
-import com.example.demo.domain.Password;
-import com.example.demo.domain.User;
-import com.example.demo.domain.UserId;
+import com.example.demo.domain.*;
 
 /**
  * User service interface
  */
-public interface UserService {
+public class UserService {
+    private final UserRepository userRepository;
+
+    UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     /**
      * 登録
+     *
      * @param userName ユーザネーム
      * @param password パスワード
-     * @param rePassword パスワード（確認用）
-     * @param firstName 名
-     * @param lastName 姓
      * @return ユーザ
      */
-    public User register(String userName, Password password, String rePassword, String firstName, String lastName);
+    public User register(String userName, String password) {
+        return userRepository.save(User.of(userName, new PasswordForSpringSecurity(password)));
+    }
 
     /**
      * パスワード更新
+     *
      * @param password パスワード
-     * @param rePassword パスワード（確認用）
      * @return ユーザ
      */
-    public User updatePassword(Password password, String rePassword);
+    public User updatePassword(UserId userId, String password) throws UserNotFoundException {
+        return userRepository
+                .findById(userId)
+                .map(beforeUser -> new User(beforeUser.getUserId(), beforeUser.getUserName(), (new PasswordForSpringSecurity(password)).getHash()))
+                .map(userRepository::save)
+                .orElseThrow(() -> new UserNotFoundException(String.format("User not found: user_id = [%s]", userId.getValue())));
+    }
 
     /**
      * 退会
+     *
      * @param userId UserId
-     * @return 退会処理結果
      */
-    public Boolean withdraw(UserId userId);
+    public void withdraw(UserId userId) throws UserNotFoundException {
+        User user = userRepository
+                .findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(String.format("User not found: user_id = [%s]", userId.getValue())));
+        userRepository.delete(user);
+    }
 
     /**
      * ユーザ取得
+     *
      * @param userId UserId
      * @return ユーザ
      */
-    public User getUser(UserId userId);
+    public User getUser(UserId userId) throws UserNotFoundException {
+        return userRepository
+                .findById(userId)
+                .orElseThrow(() -> new UserNotFoundException(String.format("User not found: user_id = [%s]", userId.getValue())));
+    }
 }

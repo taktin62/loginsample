@@ -1,5 +1,7 @@
 package com.example.demo.domain;
 
+import org.springframework.data.annotation.Id;
+
 import java.util.Optional;
 
 public class User {
@@ -7,17 +9,8 @@ public class User {
     /**
      * UserId
      */
+    @Id
     private final UserId userId;
-
-    /**
-     * 名
-     */
-    private final String firstName;
-
-    /**
-     * 姓
-     */
-    private final String lastName;
 
     /**
      * ユーザネーム（システムログイン用）
@@ -32,15 +25,11 @@ public class User {
     /**
      * コンストラクタ
      * @param userId UserId
-     * @param firstName 名
-     * @param lastName 姓
      * @param userName ユーザネーム（システムログイン用）
      * @param password パスワード
      */
-    public User(UserId userId, String firstName, String lastName, String userName, com.example.demo.domain.Password password) {
+    public User(UserId userId, String userName, com.example.demo.domain.Password password) {
         this.userId = userId;
-        this.firstName = firstName;
-        this.lastName = lastName;
         this.userName = userName;
         Password = password;
     }
@@ -51,22 +40,6 @@ public class User {
      */
     public Optional<UserId> getUserId() {
         return Optional.ofNullable(userId);
-    }
-
-    /**
-     * 名の取得
-     * @return 名
-     */
-    public String getFirstName() {
-        return firstName;
-    }
-
-    /**
-     * 姓の取得
-     * @return 姓
-     */
-    public String getLastName() {
-        return lastName;
     }
 
     /**
@@ -86,10 +59,12 @@ public class User {
     }
 
     /**
-     * 氏名の取得
-     * @return 氏名
+     * ユーザ作成
+     * @param userName ユーザネーム
+     * @param password パスワード
+     * @return ユーザ
      */
-    public String getName() {
-        return String.format("%s %s", lastName, firstName);
+    static User of(String userName, Password password) {
+        return new User(null, userName, password);
     }
 }

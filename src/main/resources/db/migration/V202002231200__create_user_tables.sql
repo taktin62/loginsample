@@ -1,6 +1,6 @@
 -- CREATE TABLES
 CREATE TABLE users (
     user_id BIGINT AUTO_INCREMENT NOT NULL PRIMARY KEY,
-    username TEXT,
-    password TEXT
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL
 )

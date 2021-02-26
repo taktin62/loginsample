@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
+// TODO: PasswordEncoderをうまく取り込めないかを検討する
 public class Password {
     /**
      * 値

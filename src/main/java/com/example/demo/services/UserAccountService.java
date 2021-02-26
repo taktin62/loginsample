@@ -7,6 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+// TODO: UserRepositoryとつなぎ込み
+// TODO: DIを考える
 @Service
 public class UserAccountService implements UserDetailsService {
     UserAccountRepository userAccountRepository = new UserAccountRepositoryImpl();

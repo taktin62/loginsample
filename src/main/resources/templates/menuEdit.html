@@ -9,13 +9,32 @@
 </head>
 
 <body>
-<form th:action="@{/menuEdit}" method="post">
-	ユーザー情報収集</br>
+	<div>ユーザー情報収集</div>
 
+    <div>
+        <!-- ユーザー編集画面ボタン -->
+        <a th:href="@{/loginSuccess}">MyPage</a>
+        <!-- ユーザー編集画面ボタン -->
+        <a th:href="@{/menuEdit}">編集</a>
+        <!-- ユーザー退会画面ボタン -->
+        <a th:href="@{/menuConfirmation}">退会</a>
+    </div>
 
-	<!-- ユーザー編集画面ボタン -->
-    <a th:href="@{/menuDetails}">更新</a>
-</form>
+    <form th:action="@{/updatePassword}" th:object="${updatePasswordForm}" method="post">
+        <table>
+            <tr>
+                <th>パスワード</th>
+                <td><input type="password" th:field="*{password}" maxlength="128" size="32"></td>
+                <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">パスワードが入力されていません</td>
+                <th>パスワード（再入力）</th>
+                <td><input type="password" th:field="*{rePassword}" maxlength="128" size="32"></td>
+                <td th:if="${#fields.hasErrors('rePassword')}" th:errors="*{rePassword}">パスワード再入力欄にパスワードが入力されていません</td>
+            </tr>
+        </table>
+        <!-- ユーザー編集画面ボタン -->
+        <button type="submit">更新</button>
+        <a th:href="@{/menuDetails}">戻る</a>
+    </form>
 </body>
 
 </html>

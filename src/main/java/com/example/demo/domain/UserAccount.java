@@ -7,6 +7,9 @@ import org.springframework.security.core.userdetails.User;
 import java.util.Collection;
 
 public class UserAccount extends User {
+
+    private UserId userId;
+
     public UserAccount(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
@@ -17,5 +20,10 @@ public class UserAccount extends User {
 
     public UserAccount(com.example.demo.domain.User user) {
         super(user.getUserName(), user.getPasswordHash(), AuthorityUtils.createAuthorityList("USER"));
+        this.userId = user.getUserId().get();
+    }
+
+    public UserId getUserId() {
+        return userId;
     }
 }

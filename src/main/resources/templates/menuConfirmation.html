@@ -9,11 +9,11 @@
 </head>
 
 <body>
-<form th:action="@{/menuConfirmation}" method="post">
+<form th:action="@{/menuDone}" method="post">
 	<!-- ユーザー編集画面ボタン -->
-    <a th:href="@{/menuDone}">はい</a>
-    <a>いいえ</a>
+    <button>はい</button>
 </form>
+<a th:href="@{/menuDetails}">いいえ</a>
 </body>
 
 </html>

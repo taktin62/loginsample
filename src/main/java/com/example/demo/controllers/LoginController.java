@@ -2,7 +2,10 @@ package com.example.demo.controllers;
 
 import java.security.Principal;
 
+import com.example.demo.domain.UserAccount;
+import com.example.demo.domain.UserId;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,9 +24,8 @@ public class LoginController {
     }
 
     @GetMapping("/loginSuccess")
-    public String loginSuccessForm(Principal principal, Model model) {
-        Authentication authentication = (Authentication)principal;
-        String username = authentication.getName();
+    public String loginSuccessForm(@AuthenticationPrincipal UserAccount userAccount, Model model) {
+        String username = userAccount.getUsername();
         model.addAttribute("username", username);
         return "loginSuccess";
     }

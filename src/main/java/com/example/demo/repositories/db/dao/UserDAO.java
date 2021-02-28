@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Component
 public interface UserDAO extends CrudRepository<User, Long> {
-    @Query("SELECT * FROM user WHERE user_name = :userName")
+    @Query("SELECT * FROM \"users\" WHERE user_name = :userName")
     public Optional<User> findByUserName(@Param("userName") String userName);
 }

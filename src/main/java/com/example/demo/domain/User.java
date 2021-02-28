@@ -35,8 +35,8 @@ public class User {
      * UserId取得
      * @return UserId
      */
-    public UserId getUserId() {
-        return userId;
+    public Optional<UserId> getUserId() {
+        return Optional.ofNullable(userId);
     }
 
     /**

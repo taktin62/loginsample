@@ -1,14 +1,19 @@
 package com.example.demo.services;
 
 import com.example.demo.domain.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * User service interface
  */
+@Service
 public class UserService {
+
     private final UserRepository userRepository;
 
-    UserService(UserRepository userRepository) {
+    @Autowired
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -32,7 +37,7 @@ public class UserService {
     public User updatePassword(UserId userId, String password) throws UserNotFoundException {
         return userRepository
                 .findById(userId)
-                .map(beforeUser -> new User(beforeUser.getUserId(), beforeUser.getUserName(), (new PasswordForSpringSecurity(password)).getHash()))
+                .map(beforeUser -> new User(beforeUser.getUserId().get(), beforeUser.getUserName(), (new PasswordForSpringSecurity(password)).getHash()))
                 .map(userRepository::save)
                 .orElseThrow(() -> new UserNotFoundException(String.format("User not found: user_id = [%s]", userId.getValue())));
     }

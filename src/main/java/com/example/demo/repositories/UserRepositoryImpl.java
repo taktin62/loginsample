@@ -5,16 +5,16 @@ import com.example.demo.domain.UserId;
 import com.example.demo.domain.UserRepository;
 import com.example.demo.repositories.db.dao.UserDAO;
 import com.example.demo.repositories.db.translator.UserTranslator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public class UserRepositoryImpl implements UserRepository {
 
-    private final UserDAO userDAO;
-
-    UserRepositoryImpl(UserDAO userDAO) {
-        this.userDAO = userDAO;
-    }
+    @Autowired
+    UserDAO userDAO;
 
     @Override
     public User save(User user) {

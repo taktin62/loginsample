@@ -9,23 +9,31 @@
 </head>
 
 <body>
-<form th:action="@{/signup}" method="post">
+<form action="#" th:action="@{/signup}" th:object="${signupForm}" method="post">
 	<table>
 	<tbody>
 		<tr>
-		<th>ユーザーID</th>
-		<td><input type="text" name="username" maxlength="128" size="32"></td>
+			<th>ユーザーID</th>
+			<td><input type="text" th:field="*{userName}" maxlength="128" size="32"></td>
+            <td th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}">ユーザ名が入力されていません</td>
 		</tr>
 
 		<tr>
-		<th>パスワード</th>
-		<td><input type="password" name="password" maxlength="128" size="32"></td>
+			<th>パスワード</th>
+			<td><input type="password" th:field="*{password}" maxlength="128" size="32"></td>
+			<td th:if="${#fields.hasErrors('password')}" th:errors="*{password}">パスワードが入力されていません</td>
+		</tr>
+
+		<tr>
+			<th>パスワード再入力</th>
+			<td><input type="password" th:field="*{rePassword}" maxlength="128" size="32"></td>
+			<td th:if="${#fields.hasErrors('rePassword')}" th:errors="*{rePassword}">パスワード再入力欄にパスワードが入力されていません</td>
 		</tr>
 
 		</tbody>
 	</table>
 	<!-- ユーザー新規登録ボタン -->
-    <a th:href="@{/signupConfirmation}">確認</a>
+	<button type="submit">確認</button>
     <a>戻る</a>
 </form>
 </body>

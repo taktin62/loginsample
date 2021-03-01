@@ -9,16 +9,26 @@
 </head>
 
 <body>
-<form th:action="@{/menuDetails}" method="post">
-	ユーザー情報</br>
 
+  <div>ユーザー情報</div>
 
+  <div>
+    <!-- ユーザー編集画面ボタン -->
+    <a th:href="@{/loginSuccess}">MyPage</a>
 	<!-- ユーザー編集画面ボタン -->
     <a th:href="@{/menuEdit}">編集</a>
     <!-- ユーザー退会画面ボタン -->
     <a th:href="@{/menuConfirmation}">退会</a>
-</form>
+  </div>
 
+  <div>
+    <table>
+      <tr>
+        <th>ユーザ名：</th>
+        <td th:text="${username}"></td>
+      </tr>
+    </table>
+  </div>
 </body>
 
 </html>
